@@ -1,11 +1,11 @@
+import { contactInfo } from '@/data/mockData';
 import { Facebook, Hammer, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { contactInfo } from '@/data/mockData';
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-wood-900 text-white">
+        <footer className="bg-gradient-to-r from-red-900 via-rose-800 to-pink-700 text-white">
             <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
                     {/* Company Info */}
@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
                                 <Hammer className="h-6 w-6 text-white" />
                             </div>
                             <div>
-                                <h3 className="text-lg font-bold">Artisan Woodworks</h3>
+                                <h3 className="text-lg font-bold">Multibina Rezq Resources</h3>
                                 <p className="text-wood-300 text-sm">Custom Furniture & Wardrobes</p>
                             </div>
                         </div>
@@ -117,7 +117,7 @@ const Footer: React.FC = () => {
                 {/* Bottom Bar */}
                 <div className="border-wood-800 mt-12 border-t pt-8">
                     <div className="flex flex-col items-center justify-between md:flex-row">
-                        <p className="text-wood-400 text-sm">© 2024 Artisan Woodworks. All rights reserved.</p>
+                        <p className="text-wood-400 text-sm">© {new Date().getFullYear()} Multibina Rezq Resources. All rights reserved.</p>
                         <div className="mt-4 flex space-x-6 md:mt-0">
                             <Link to="/admin" className="text-wood-400 text-sm transition-colors duration-200 hover:text-white">
                                 Admin Login
