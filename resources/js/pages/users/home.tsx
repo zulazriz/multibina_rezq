@@ -3,10 +3,37 @@ import Card from '@/components/ui/card';
 import { aboutContent, projects } from '@/data/mockData';
 import { Head } from '@inertiajs/react';
 import { ArrowRight, Award, Calendar, Star, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
     const featuredProjects = projects.filter((project) => project.featured).slice(0, 3);
+
+    const images = [
+        '/images/1.jpeg',
+        '/images/2.jpeg',
+        '/images/3.jpeg',
+        '/images/4.jpeg',
+        '/images/5.jpeg',
+        '/images/6.jpeg',
+        '/images/7.jpeg',
+        '/images/8.jpeg',
+        '/images/9.jpeg',
+        '/images/10.jpeg',
+        '/images/11.jpeg',
+        '/images/12.jpeg',
+        '/images/13.jpeg',
+    ];
+
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+        }, 3000); // 5 seconds per slide
+
+        return () => clearInterval(interval);
+    }, [images.length]);
 
     return (
         <>
@@ -14,16 +41,15 @@ export default function Home() {
 
             <div className="min-h-screen">
                 {/* Hero Section */}
-                <section className="from-wood-800 to-wood-600 relative bg-gradient-to-r text-white">
-                    <div className="bg-opacity-30 absolute inset-0 bg-black"></div>
+                <section className="relative py-30">
                     <div
-                        className="relative bg-cover bg-center bg-no-repeat"
+                        className="relative bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
                         style={{
-                            backgroundImage: 'url(https://images.pexels.com/photos/5691659/pexels-photo-5691659.jpeg)',
+                            backgroundImage: `url(${images[currentImageIndex]})`,
                             backgroundBlendMode: 'overlay',
                         }}
                     >
-                        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+                        <div className="mx-auto max-w-7xl px-4 py-24 text-black sm:px-6 lg:px-8 lg:py-32">
                             <div className="max-w-3xl">
                                 <h1 className="mb-6 text-4xl leading-tight font-bold lg:text-6xl">
                                     Crafting Dreams into
@@ -35,7 +61,7 @@ export default function Home() {
                                 </p>
                                 <div className="flex flex-col gap-4 sm:flex-row">
                                     <Button size="lg" className="px-8 py-4 text-lg">
-                                        <Link to="/gallery" className="flex items-center">
+                                        <Link to="/gallery" className="flex items-center text-black">
                                             View Our Work
                                             <ArrowRight className="ml-2 h-5 w-5" />
                                         </Link>
@@ -43,7 +69,7 @@ export default function Home() {
                                     <Button
                                         variant="outline"
                                         size="lg"
-                                        className="hover:text-wood-800 border-white px-8 py-4 text-lg text-white hover:bg-white"
+                                        className="border-black px-8 py-4 text-lg text-black transition duration-300 ease-in-out hover:bg-gradient-to-r hover:from-rose-800 hover:to-pink-600 hover:text-black"
                                     >
                                         <Link to="/contact">Get Free Quote</Link>
                                     </Button>
@@ -54,7 +80,7 @@ export default function Home() {
                 </section>
 
                 {/* Stats Section */}
-                <section className="bg-wood-50 py-16">
+                <section className="bg-gradient-to-r from-pink-100 via-yellow-100 to-blue-100 py-20">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
                             <div className="space-y-2">
@@ -78,7 +104,7 @@ export default function Home() {
                 </section>
 
                 {/* About Preview */}
-                <section className="bg-white py-20">
+                <section className="bg-gradient-to-r from-pink-100 via-yellow-100 to-blue-100 py-20">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
                             <div>
@@ -102,13 +128,19 @@ export default function Home() {
                                         <span className="text-wood-700 font-medium">Timely Delivery</span>
                                     </div>
                                 </div>
-                                <Button size="lg">
-                                    <Link to="/about">Learn More About Us</Link>
+                                <Button
+                                    variant="outline"
+                                    size="lg"
+                                    className="border-black px-8 py-4 text-lg text-black transition duration-300 ease-in-out hover:bg-gradient-to-r hover:from-rose-800 hover:to-pink-600 hover:text-black"
+                                >
+                                    <Link to="/about" className="text-inherit">
+                                        Learn More About Us
+                                    </Link>
                                 </Button>
                             </div>
                             <div className="relative">
                                 <img src={aboutContent.teamImage} alt="Our craftsmen at work" className="rounded-xl shadow-2xl" />
-                                <div className="bg-wood-600 absolute -right-6 -bottom-6 rounded-xl p-6 text-white shadow-lg">
+                                <div className="absolute -right-6 -bottom-6 rounded-xl bg-gray-200 p-6 text-black shadow-lg">
                                     <div className="text-2xl font-bold">25+</div>
                                     <div className="text-sm">Years of Excellence</div>
                                 </div>
@@ -118,7 +150,7 @@ export default function Home() {
                 </section>
 
                 {/* Featured Projects */}
-                <section className="bg-wood-50 py-20">
+                <section className="bg-gradient-to-r from-pink-100 via-yellow-100 to-blue-100 py-20">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="mb-12 text-center">
                             <h2 className="text-wood-800 mb-4 text-3xl font-bold lg:text-4xl">Featured Projects</h2>
@@ -164,9 +196,9 @@ export default function Home() {
 
                         <div className="text-center">
                             <Button size="lg">
-                                <Link to="/gallery" className="flex items-center">
+                                <Link to="/gallery" className="flex items-center text-black">
                                     View All Projects
-                                    <ArrowRight className="ml-2 h-5 w-5" />
+                                    <ArrowRight className="ml-2 h-5 w-5 text-black" />
                                 </Link>
                             </Button>
                         </div>
@@ -174,7 +206,7 @@ export default function Home() {
                 </section>
 
                 {/* Call to Action */}
-                <section className="from-wood-700 to-wood-800 bg-gradient-to-r py-20 text-white">
+                <section className="bg-gradient-to-r from-pink-100 via-yellow-100 to-blue-100 py-20">
                     <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
                         <h2 className="mb-6 text-3xl font-bold lg:text-4xl">Ready to Transform Your Space?</h2>
                         <p className="text-wood-100 mx-auto mb-8 max-w-3xl text-xl">
@@ -182,15 +214,13 @@ export default function Home() {
                             step of the way.
                         </p>
                         <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                className="hover:text-wood-800 border-white px-8 py-4 text-lg text-white hover:bg-white"
-                            >
+                            <Button variant="outline" size="lg" className="border-black px-8 py-4 text-lg text-black hover:bg-black hover:text-white">
                                 <Link to="/contact">Get Free Consultation</Link>
                             </Button>
                             <Button variant="secondary" size="lg" className="px-8 py-4 text-lg">
-                                <Link to="/services">Explore Services</Link>
+                                <Link to="/services" className="text-black">
+                                    Explore Services
+                                </Link>
                             </Button>
                         </div>
                     </div>
